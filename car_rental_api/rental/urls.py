@@ -1,11 +1,10 @@
-from django.urls import path
-from . import views
-from .views import rental_list, rental_create, rental_detail, rental_delete
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import RentalViewSet
+
+router = DefaultRouter()
+router.register(r'', RentalViewSet)
 
 urlpatterns = [
-    path('', rental_list, name='rental-list'),
-    path('create/', rental_create, name='rental-create'),
-    path('<int:pk>/', rental_detail, name='rental-detail'),
-    path('<int:pk>/delete/', rental_delete, name='rental-delete'),
-    
+    path('', include(router.urls)),
 ]
