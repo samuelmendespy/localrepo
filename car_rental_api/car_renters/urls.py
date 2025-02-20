@@ -3,7 +3,7 @@ from rest_framework.routers import DefaultRouter
 from .views import CarRenterViewSet
 
 router = DefaultRouter()
-router.register(r'renters', CarRenterViewSet)
+router.register(r'', CarRenterViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
