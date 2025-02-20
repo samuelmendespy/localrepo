@@ -7,26 +7,3 @@ class RentalSerializer(serializers.ModelSerializer):
     class Meta:
         model = Rental
         fields = '__all__'
-    
-    def validate(self, data):
-        """Enforce rental rules before creating a rental."""
-        car = data['car']
-        renter = data['renter']
-        
-        if renter.license_type < car.minimun_license_type:
-            raise serializers.ValidationError("The driver license is too low to rent this car.")
-
-        # Check if renter has already rented a car today
-        existing_rental = Rental.objects.filter(
-            renter=renter, start_date__date=data['start_date'].date()
-        ).exists()
-
-        if existing_rental:
-            raise serializers.ValidationError("You can only rent one car per day.")
-
-        return data
-    
-    def create(self, validated_data):
-        """Create a rental."""
-        rental = Rental.objects.create(**validated_data)
-        return rental
