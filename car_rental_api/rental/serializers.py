@@ -1,12 +1,12 @@
 from rest_framework import serializers
-from .models import Carro, Locatario
+from .models import Rental
+from car_renters.serializers import CarRenterSerializer
+from cars.serializers import CarSerializer
 
-class CarroSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Carro
-        fields = '__all__'
+class RentalSerializer(serializers.ModelSerializer):
+    car = CarSerializer()
+    renter = CarRenterSerializer()
 
-class LocatarioSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Locatario
+        model = Rental
         fields = '__all__'
