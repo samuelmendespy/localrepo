@@ -13,8 +13,8 @@ class RentalSerializer(serializers.ModelSerializer):
         car = data['car']
         renter = data['renter']
         
-        if renter.reputation < car.minimum_reputation:
-            raise serializers.ValidationError("Your reputation is too low to rent this car.")
+        if renter.license_type < car.minimun_license_type:
+            raise serializers.ValidationError("The driver license is too low to rent this car.")
 
         # Check if renter has already rented a car today
         existing_rental = Rental.objects.filter(
@@ -27,6 +27,6 @@ class RentalSerializer(serializers.ModelSerializer):
         return data
     
     def create(self, validated_data):
-        """Create a rental and mark the car as rented."""
+        """Create a rental."""
         rental = Rental.objects.create(**validated_data)
         return rental
