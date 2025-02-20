@@ -10,4 +10,4 @@ class Rental(models.Model):
     end_date = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
-        return self.codigo
+        return f"{self.renter.name} rented {self.car.codigo} from {self.start_date}"
