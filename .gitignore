@@ -1,0 +1,13 @@
+# Environment variables env
+.env
+
+# Python
+*.pyc
+__pycache__/
+*/__pycache__
+
+# Logs
+*.log
+
+# database volume
+database/data/
