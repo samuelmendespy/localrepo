@@ -9,7 +9,6 @@ class RendaChoices(models.IntegerChoices):
 class Car(models.Model):
     codigo = models.CharField(max_length=20, unique=True)
     renda_minima = models.IntegerField(choices=RendaChoices.choices, default=RendaChoices.BAD)
-    is_rented = models.BooleanField(default=False)
 
     def __str__(self):
         return self.codigo

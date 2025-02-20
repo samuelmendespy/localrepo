@@ -81,7 +81,5 @@ def rental_delete(request, pk):
         })
     
     rental = get_object_or_404(Rental, pk=pk)
-    rental.car.is_rented = False
-    rental.car.save()
     rental.delete()
     return Response(status=status.HTTP_204_NO_CONTENT)
