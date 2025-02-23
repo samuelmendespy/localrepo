@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import UserDialog from "../../components/UserDialog";
+import UserDialog from "../../../components/UserDialog";
 import Icon from "@mdi/react";
 import {
   mdiAccountPlus,
@@ -20,7 +20,7 @@ const users = [
   { id: 5, name: "Bob Nova", salary: 300 },
 ];
 
-export default function Home() {
+export default function RenterPage() {
   const [sortedUsers, setSortedUsers] = useState(users);
   const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
 
@@ -44,7 +44,7 @@ export default function Home() {
     <div className="container">
       <div className="text-left py-6 pl-4">
         <p className="text-4xl font-semibold text-gray-800 dark:text-gray-200">
-          Car Page
+          Drivers Page
         </p>
       </div>
       <div className="flex flex-row justify-between items-center w-80 border-b-2 border-gray-400 focus-within:border-blue-600 ml-4">

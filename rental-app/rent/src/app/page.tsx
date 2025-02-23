@@ -15,17 +15,17 @@ export default function Home() {
     {
       icon: <Icon path={mdiCar} size={3} />,
       label: "Manage Cars",
-      href: "/car",
+      href: "/manage/car",
     },
     {
       icon: <Icon path={mdiAccountGroup} size={3} />,
       label: "Manage Renters",
-      href: "/renter",
+      href: "/manage/renter",
     },
     {
       icon: <Icon path={mdiCalendar} size={3} />,
       label: "Manage Rents",
-      href: "/rental",
+      href: "/manage/rental",
     },
   ];
 

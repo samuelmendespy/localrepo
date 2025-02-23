@@ -12,7 +12,7 @@ import {
   mdiPencil,
 } from "@mdi/js";
 
-const users = [
+const cars = [
   { id: 1, name: "Hyundai Santa Fe", salary: 250 },
   { id: 2, name: "JEEP Grand Cheroke", salary: 250 },
   { id: 3, name: "Ford Escape", salary: 220 },
@@ -21,7 +21,7 @@ const users = [
 ];
 
 export default function CarPage() {
-  const [sortedUsers, setSortedUsers] = useState(users);
+  const [sortedCars, setSortedCars] = useState(cars);
   const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
 
   const sortData = (key) => {
@@ -30,13 +30,13 @@ export default function CarPage() {
       direction = "desc";
     }
 
-    const sorted = [...sortedUsers].sort((a, b) => {
+    const sorted = [...sortedCars].sort((a, b) => {
       if (a[key] < b[key]) return direction === "asc" ? -1 : 1;
       if (a[key] > b[key]) return direction === "asc" ? 1 : -1;
       return 0;
     });
 
-    setSortedUsers(sorted);
+    setSortedCars(sorted);
     setSortConfig({ key, direction });
   };
 
@@ -89,11 +89,11 @@ export default function CarPage() {
             </tr>
           </thead>
           <tbody>
-            {sortedUsers.map((user) => (
-              <tr key={user.id} className="border-t dark:border-gray-700">
-                <td className="p-3">{user.id}</td>
-                <td className="p-3">{user.name}</td>
-                <td className="p-3">${user.salary.toLocaleString()}</td>
+            {sortedCars.map((car) => (
+              <tr key={car.id} className="border-t dark:border-gray-700">
+                <td className="p-3">{car.id}</td>
+                <td className="p-3">{car.name}</td>
+                <td className="p-3">${car.salary.toLocaleString()}</td>
                 <td className="p-3 text-right">
                   <button className="p-1 rounded hover:bg-gray-300 dark:hover:bg-gray-700">
                     <Icon path={mdiPencil} size={0.8} />
@@ -137,7 +137,7 @@ export default function CarPage() {
             <Icon path={mdiChevronRight} size={1} />
           </div>
         </div>
-        <UserDialog users={users} />
+        <UserDialog users={cars} />
       </div>
     </div>
   );
