@@ -1,7 +1,7 @@
-type CarRenter = {
+type Rental = {
   id: number;
   car: Car;
-  renter: User;
+  renter: CarRenter;
   start_date: string;
   end_date: string;
 };
