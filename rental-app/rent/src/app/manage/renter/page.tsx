@@ -12,7 +12,7 @@ import {
   mdiPencil,
 } from "@mdi/js";
 
-const users = [
+const renters: CarRenter[] = [
   { id: 1, name: "John Doe", salary: 250 },
   { id: 2, name: "Jane Doe", salary: 250 },
   { id: 3, name: "Smith Karl", salary: 220 },
@@ -21,22 +21,22 @@ const users = [
 ];
 
 export default function RenterPage() {
-  const [sortedUsers, setSortedUsers] = useState(users);
+  const [sortedRenters, setSortedRenters] = useState<CarRenter[]>(renters);
   const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
 
-  const sortData = (key) => {
+  const sortData = (key: keyof CarRenter) => {
     let direction = "asc";
     if (sortConfig.key === key && sortConfig.direction === "asc") {
       direction = "desc";
     }
 
-    const sorted = [...sortedUsers].sort((a, b) => {
+    const sorted = [...sortedRenters].sort((a, b) => {
       if (a[key] < b[key]) return direction === "asc" ? -1 : 1;
       if (a[key] > b[key]) return direction === "asc" ? 1 : -1;
       return 0;
     });
 
-    setSortedUsers(sorted);
+    setSortedRenters(sorted);
     setSortConfig({ key, direction });
   };
 
@@ -89,7 +89,7 @@ export default function RenterPage() {
             </tr>
           </thead>
           <tbody>
-            {sortedUsers.map((user) => (
+            {sortedRenters.map((user) => (
               <tr key={user.id} className="border-t dark:border-gray-700">
                 <td className="p-3">{user.id}</td>
                 <td className="p-3">{user.name}</td>
@@ -137,7 +137,7 @@ export default function RenterPage() {
             <Icon path={mdiChevronRight} size={1} />
           </div>
         </div>
-        <UserDialog users={users} />
+        <UserDialog users={renters} />
       </div>
     </div>
   );

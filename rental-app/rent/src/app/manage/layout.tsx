@@ -1,18 +1,7 @@
 "use client";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./../globals.css";
 import SidebarLeft from "@/components/SidebarLeft";
 import { useState } from "react";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export default function ManageLayout({
   children,
@@ -22,16 +11,17 @@ export default function ManageLayout({
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <SidebarLeft
-          isCollapsed={isCollapsed}
-          toggleSidebar={() => setIsCollapsed(!isCollapsed)}
-        />
-        {children}
-      </body>
-    </html>
+    <div className="flex h-screen">
+      <SidebarLeft
+        isCollapsed={isCollapsed}
+        toggleSidebar={() => setIsCollapsed(!isCollapsed)}
+      />
+      <div className="flex-1 flex flex-col">
+        <header>
+          <h1>Next App</h1>
+        </header>
+        <main className="flex-1 p-6 overflow-auto">{children}</main>
+      </div>
+    </div>
   );
 }

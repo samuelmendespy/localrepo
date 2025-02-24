@@ -12,19 +12,19 @@ import {
   mdiPencil,
 } from "@mdi/js";
 
-const cars: CarRenter[] = [
-  { id: 1, name: "Hyundai Santa Fe", salary: 250 },
-  { id: 2, name: "JEEP Grand Cheroke", salary: 250 },
-  { id: 3, name: "Ford Escape", salary: 220 },
-  { id: 4, name: "Toyota RAV4", salary: 240 },
-  { id: 5, name: "Kia Rio", salary: 300 },
+const cars: Car[] = [
+  { id: 1, name: "Hyundai Santa Fe", minimun_salary: 250 },
+  { id: 2, name: "JEEP Grand Cheroke", minimun_salary: 250 },
+  { id: 3, name: "Ford Escape", minimun_salary: 220 },
+  { id: 4, name: "Toyota RAV4", minimun_salary: 240 },
+  { id: 5, name: "Kia Rio", minimun_salary: 300 },
 ];
 
 export default function CarPage() {
-  const [sortedCars, setSortedCars] = useState<CarRenter[]>(cars);
+  const [sortedCars, setSortedCars] = useState<Car[]>(cars);
   const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
 
-  const sortData = (key) => {
+  const sortData = (key: keyof Car) => {
     let direction = "asc";
     if (sortConfig.key === key && sortConfig.direction === "asc") {
       direction = "desc";
@@ -93,7 +93,7 @@ export default function CarPage() {
               <tr key={car.id} className="border-t dark:border-gray-700">
                 <td className="p-3">{car.id}</td>
                 <td className="p-3">{car.name}</td>
-                <td className="p-3">${car.salary.toLocaleString()}</td>
+                <td className="p-3">${car.minimun_salary.toLocaleString()}</td>
                 <td className="p-3 text-right">
                   <button className="p-1 rounded hover:bg-gray-300 dark:hover:bg-gray-700">
                     <Icon path={mdiPencil} size={0.8} />
