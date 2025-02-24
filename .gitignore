@@ -10,4 +10,4 @@ __pycache__/
 *.log
 
 # database volume
-database/data/
+backend/database/data/
