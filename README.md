@@ -26,21 +26,25 @@ Nginx can provide addition features, as caching, SSL/TLS (HTTPS), and load balan
 Requiriments file can be generated with the following command
 pip freeze > requirements.txt
 
-```markdown
+```docker-compose.yml
 web:
-build: ./car_rental_api
-container_name: django-app
-ports: - "8000:8000"
-volumes: - ./car_rental_api:/app
-depends_on: - db
-environment:
-DB_NAME: ${MYSQL_DATABASE}
-DB_USER: ${MYSQL_USER}
-DB_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-DB_HOST: db
-DB_PORT: 3306
-restart: unless-stopped
-networks: - backend
+  build: ./backend/infrastructure
+  container_name: django-app
+  ports:
+    - "8000:8000"
+  volumes:
+    - ./backend/infrastructure:/app
+  depends_on:
+    - db
+  environment:
+    DB_NAME: ${MYSQL_DATABASE}
+    DB_USER: ${MYSQL_USER}
+    DB_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    DB_HOST: db
+    DB_PORT: 3306
+  restart: unless-stopped
+  networks:
+    - backend
 ```
 
 ## FRONTEND
