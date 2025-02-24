@@ -13,4 +13,4 @@ class Car(models.Model):
     minimun_license_type = models.IntegerField(choices=TypeChoices.choices, default=TypeChoices.ATYPE)
 
     def __str__(self):
-        return self.codigo
+        return self.plate
