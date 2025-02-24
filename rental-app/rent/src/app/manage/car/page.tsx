@@ -12,7 +12,7 @@ import {
   mdiPencil,
 } from "@mdi/js";
 
-const cars = [
+const cars: CarRenter[] = [
   { id: 1, name: "Hyundai Santa Fe", salary: 250 },
   { id: 2, name: "JEEP Grand Cheroke", salary: 250 },
   { id: 3, name: "Ford Escape", salary: 220 },
@@ -21,7 +21,7 @@ const cars = [
 ];
 
 export default function CarPage() {
-  const [sortedCars, setSortedCars] = useState(cars);
+  const [sortedCars, setSortedCars] = useState<CarRenter[]>(cars);
   const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
 
   const sortData = (key) => {
