@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import UserDialog from "../../../components/UserDialog";
 import Icon from "@mdi/react";
 import {
@@ -12,59 +12,27 @@ import {
   mdiPencil,
 } from "@mdi/js";
 
-const sampleCar: Car = {
-  id: 1,
-  minimun_salary: 300,
-  name: "Santa Fé",
-};
-
-const sampleUser: Renter = {
-  id: 1,
-  name: "John Doe",
-  salary: 300,
-};
-
-const rentals: Rental[] = [
-  {
-    id: 1,
-    car: sampleCar,
-    renter: sampleUser,
-    start_date: "2025-02-01",
-    end_date: "2025-02-07",
-  },
-  {
-    id: 2,
-    car: sampleCar,
-    renter: sampleUser,
-    start_date: "2025-02-10",
-    end_date: "2025-02-14",
-  },
-  {
-    id: 3,
-    car: sampleCar,
-    renter: sampleUser,
-    start_date: "2025-02-15",
-    end_date: "2025-02-20",
-  },
-  {
-    id: 4,
-    car: sampleCar,
-    renter: sampleUser,
-    start_date: "2025-02-18",
-    end_date: "2025-02-22",
-  },
-  {
-    id: 5,
-    car: sampleCar,
-    renter: sampleUser,
-    start_date: "2025-02-21",
-    end_date: "2025-02-28",
-  },
-];
-
 export default function RentalPage() {
-  const [sortedRentals, setSortedRentals] = useState<Rental[]>(rentals);
+  const [sortedRentals, setSortedRentals] = useState<Rental[]>([]);
   const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
+
+  useEffect(() => {
+    const fetchRentals = async () => {
+      try {
+        const response = await fetch("/api/rentals"); // Call your API route
+        if (response.ok) {
+          const rentals = await response.json();
+          setSortedRentals(rentals);
+        } else {
+          console.error("Failed to fetch rentals");
+        }
+      } catch (error) {
+        console.error("Error fetching rentals:", error);
+      }
+    };
+
+    fetchRentals();
+  }, []);
 
   const sortData = (key: keyof Rental) => {
     let direction = "asc";
@@ -179,7 +147,6 @@ export default function RentalPage() {
             <Icon path={mdiChevronRight} size={1} />
           </div>
         </div>
-        <UserDialog users={rentals} />
       </div>
     </div>
   );
