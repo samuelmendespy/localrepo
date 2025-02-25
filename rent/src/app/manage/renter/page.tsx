@@ -20,44 +20,6 @@ const renters: Renter[] = [
   { id: 5, name: "Bob Nova", salary: 300 },
 ];
 
-const newRenters: Renter[] = [
-  {
-    id: 1,
-    tenant_name: "John Doe",
-    car_plate: "ABC 1234",
-    start_date: "2025-02-01",
-    end_date: "2025-02-07",
-  },
-  {
-    id: 2,
-    tenant_name: "Jane Smith",
-    car_plate: "XYZ 5678",
-    start_date: "2025-02-10",
-    end_date: "2025-02-14",
-  },
-  {
-    id: 3,
-    tenant_name: "Michael Brown",
-    car_plate: "LMN 9101",
-    start_date: "2025-02-15",
-    end_date: "2025-02-20",
-  },
-  {
-    id: 4,
-    tenant_name: "Emily White",
-    car_plate: "JKL 2345",
-    start_date: "2025-02-18",
-    end_date: "2025-02-22",
-  },
-  {
-    id: 5,
-    tenant_name: "David Green",
-    car_plate: "DEF 6789",
-    start_date: "2025-02-21",
-    end_date: "2025-02-28",
-  },
-];
-
 export default function RenterPage() {
   const [sortedRenters, setSortedRenters] = useState<Renter[]>(renters);
   const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
