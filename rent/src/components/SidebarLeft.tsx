@@ -5,7 +5,6 @@ import {
   mdiTruck,
   mdiAccountGroup,
   mdiReceiptTextClock,
-  mdiMenu,
   mdiChevronDown,
   mdiAccountPlus,
   mdiMenuClose,
@@ -30,6 +29,11 @@ const sidebartItems = [
     icon: <Icon path={mdiReceiptTextClock} size={1} />,
     label: "Rentals",
     href: "/manage/rental",
+  },
+  {
+    icon: <Icon path={mdiReceiptTextClock} size={1} />,
+    label: "Evento",
+    href: "/manage/event",
   },
 ];
 
