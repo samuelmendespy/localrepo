@@ -23,6 +23,14 @@ const EventForm = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    const eventData: Event = {
+      event_name: eventName,
+      event_place: eventPlace,
+      start_date: dateRange[0].startDate.toISOString(), // Ensure the format
+      end_date: dateRange[0].endDate.toISOString(), // Ensure the format
+    };
+
     alert(`Event name: ${eventName}\nEvent duration: ${eventDuration} dias`);
   };
 

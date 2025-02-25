@@ -73,22 +73,27 @@ export async function POST(request: Request) {
     startDate,
     endDate,
   });
+  const formData = new FormData();
+  formData.append("driver_name", eventName);
+  formData.append("car_plate", eventPlace);
+  formData.append("start_date", startDate);
+  formData.append("end_date", endDate);
 
-  const event = {
-    event_name: eventName,
-    event_place: eventPlace,
+  const rental = {
+    driverName: eventName,
+    car_plate: eventPlace,
     start_place: startDate,
     end_date: endDate,
   };
 
-  const formData = await request.formData();
+  // const formData = await request.formData();
   const data = Object.fromEntries(formData.entries());
-  const { renter_name, car_plate, start_date, end_date } = data;
+  // const { name, email, password } = data;
   return NextResponse.json(
     {
       sucess: true,
       message: "Rental registered sucessfully",
-      data: { event },
+      data: { data },
     },
     { status: 201 }
   );
