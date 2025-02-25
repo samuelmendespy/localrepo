@@ -66,14 +66,29 @@ async function fetchRentalsFromServer() {
 }
 
 export async function POST(request: Request) {
+  const { eventName, eventPlace, startDate, endDate } = await request.json();
+  console.log("Received event data:", {
+    eventName,
+    eventPlace,
+    startDate,
+    endDate,
+  });
+
+  const event = {
+    event_name: eventName,
+    event_place: eventPlace,
+    start_place: startDate,
+    end_date: endDate,
+  };
+
   const formData = await request.formData();
   const data = Object.fromEntries(formData.entries());
   const { renter_name, car_plate, start_date, end_date } = data;
   return NextResponse.json(
     {
       sucess: true,
-      message: "User registered sucessfully",
-      data: { renter_name, car_plate, start_date, end_date },
+      message: "Rental registered sucessfully",
+      data: { event },
     },
     { status: 201 }
   );

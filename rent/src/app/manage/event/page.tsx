@@ -23,7 +23,7 @@ const EventForm = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert(`Evento: ${eventName}\nDuração: ${eventDuration} dias`);
+    alert(`Event name: ${eventName}\nEvent duration: ${eventDuration} dias`);
   };
 
   return (
@@ -42,7 +42,8 @@ const EventForm = () => {
             value={eventName}
             onChange={(e) => setEventName(e.target.value)}
             placeholder="Type the event name"
-            className="w-full p-2 border border-gray-300 rounded-md mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-2 text-gray-700 border border-gray-300 rounded-md mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
           />
         </div>
         <div>
@@ -54,7 +55,7 @@ const EventForm = () => {
             value={eventPlace}
             onChange={(e) => setEventPlace(e.target.value)}
             placeholder="Type the event place"
-            className="w-full p-2 border border-gray-300 rounded-md mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-2 text-gray-700 border border-gray-300 rounded-md mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
         </div>
