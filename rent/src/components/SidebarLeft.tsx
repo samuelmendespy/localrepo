@@ -6,7 +6,6 @@ import {
   mdiAccountGroup,
   mdiReceiptTextClock,
   mdiChevronDown,
-  mdiAccountPlus,
   mdiMenuClose,
 } from "@mdi/js";
 
@@ -89,15 +88,7 @@ const SidebarLeft: React.FC<SidebarProps> = ({
         <hr
           className={`${isCollapsed ? "hidden" : "block"} border-t border-gray-300`}
         />
-        <div className={`${isCollapsed ? "hidden" : "block"}`}>
-          <button
-            type="button"
-            className="flex items-center gap-2 bg-yellow-500 hover:bg-yell text-white font-medium py-2 px-4 rounded-lg shadow-md transition duration-300"
-          >
-            <Icon path={mdiAccountPlus} size={1} />
-            ADD USER
-          </button>
-        </div>
+        <div className={`${isCollapsed ? "hidden" : "block"}`}></div>
         <div className="flex flex-col gap-4">
           <div
             className={`flex flex-col gap-4 ${isCollapsed ? "hidden" : "block"}`}
