@@ -7,8 +7,8 @@ from renters.models import Renter
 def validate_rental(car: Car, renter: Renter, start_date: datetime):
     """Validates rental conditions before creating a rental."""
 
-    if renter.reputation < car.minimum_reputation:
-        raise ValidationError("Your reputation is too low to rent this car.")
+    if renter.license_type < car.minimun_license_type:
+        raise ValidationError("Your license level is too low to rent this car.")
 
     # Check if the renter has already rented a car today
     existing_rental = Rental.objects.filter(
