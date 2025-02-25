@@ -8,6 +8,7 @@ import "react-date-range/dist/theme/default.css";
 
 const EventForm = () => {
   const [eventName, setEventName] = useState("");
+  const [eventPlace, setEventPlace] = useState("");
   const [dateRange, setDateRange] = useState([
     {
       startDate: new Date(),
@@ -16,7 +17,7 @@ const EventForm = () => {
     },
   ]);
 
-  // Calcular duração do evento em dias
+  // Calculate event duration
   const eventDuration =
     differenceInDays(dateRange[0].endDate, dateRange[0].startDate) + 1;
 
@@ -27,7 +28,9 @@ const EventForm = () => {
 
   return (
     <div className="p-6 max-w-md mx-auto bg-white shadow-xl rounded-lg">
-      <h2 className="text-2xl font-semibold text-center">Criar Evento</h2>
+      <h2 className="text-2xl font-semibold text-center text-gray-950">
+        Event
+      </h2>
 
       <form onSubmit={handleSubmit} className="space-y-4 mt-6">
         <div>
@@ -40,6 +43,18 @@ const EventForm = () => {
             onChange={(e) => setEventName(e.target.value)}
             placeholder="Type the event name"
             className="w-full p-2 border border-gray-300 rounded-md mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700">
+            Event Place
+          </label>
+          <input
+            type="text"
+            value={eventPlace}
+            onChange={(e) => setEventPlace(e.target.value)}
+            placeholder="Type the event place"
+            className="w-full p-2 border border-gray-300 rounded-md mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
         </div>
@@ -50,10 +65,15 @@ const EventForm = () => {
             Duration
           </label>
           <DateRangePicker
-            onChange={(item) => setDateRange([item.selection])}
+            onChange={(item) => {
+              console.log("Start Date:", item.selection.startDate);
+              console.log("End Date:", item.selection.endDate);
+              setDateRange([item.selection]);
+            }}
             months={2}
             ranges={dateRange}
             direction="vertical"
+            className="[&_.rdrDefinedRangesWrapper]:hidden" // Hide DefinedRanges section
           />
           <p className="text-gray-600 mt-2">
             Duration: <strong>{eventDuration} days</strong>
