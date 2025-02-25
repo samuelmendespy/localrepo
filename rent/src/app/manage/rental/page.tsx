@@ -14,7 +14,41 @@ const sampleUser: Renter = {
 };
 
 const rentals: Rental[] = [
-  { id: 1, car: sampleCar, renter: sampleUser, start_date: "", end_date: "" },
+  {
+    id: 1,
+    car: sampleCar,
+    renter: sampleUser,
+    start_date: "2025-02-01",
+    end_date: "2025-02-07",
+  },
+  {
+    id: 2,
+    car: sampleCar,
+    renter: sampleUser,
+    start_date: "2025-02-10",
+    end_date: "2025-02-14",
+  },
+  {
+    id: 3,
+    car: sampleCar,
+    renter: sampleUser,
+    start_date: "2025-02-15",
+    end_date: "2025-02-20",
+  },
+  {
+    id: 4,
+    car: sampleCar,
+    renter: sampleUser,
+    start_date: "2025-02-18",
+    end_date: "2025-02-22",
+  },
+  {
+    id: 5,
+    car: sampleCar,
+    renter: sampleUser,
+    start_date: "2025-02-21",
+    end_date: "2025-02-28",
+  },
 ];
 
 export default function RentalPage() {
