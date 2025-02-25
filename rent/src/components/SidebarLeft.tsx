@@ -52,13 +52,13 @@ const SidebarLeft: React.FC<SidebarProps> = ({
       <div>
         <button
           onClick={toggleSidebar}
-          className={`${isCollapsed ? "hidden" : "block"} absolute top-1 left-1 z-50 p-2 bg-gray-800 text-white rounded-full shadow-lg focus:outline-none`}
+          className={`absolute top-1 left-1 z-50 p-2 bg-gray-800 text-white rounded-full shadow-lg focus:outline-none`}
         >
           <Icon path={mdiMenuClose} size={1} />
         </button>
         <div className="mb-4">
-          <p className={`${isCollapsed ? "hidden" : "block"}`}></p>
-          <div className={`${isCollapsed ? "hidden" : "block"}`}>
+          <p className={``}></p>
+          <div className={``}>
             <div className="flex justify-center mb-4">
               <Image
                 className="dark:invert"
@@ -85,14 +85,10 @@ const SidebarLeft: React.FC<SidebarProps> = ({
             </div>
           </div>
         </div>
-        <hr
-          className={`${isCollapsed ? "hidden" : "block"} border-t border-gray-300`}
-        />
-        <div className={`${isCollapsed ? "hidden" : "block"}`}></div>
+        <hr className={`border-t border-gray-300`} />
+        <div className={``}></div>
         <div className="flex flex-col gap-4">
-          <div
-            className={`flex flex-col gap-4 ${isCollapsed ? "hidden" : "block"}`}
-          >
+          <div className={`flex flex-col gap-4`}>
             {sidebartItems.map((item, index) => (
               <div key={index} className="link-group flex flex-col gap-4">
                 <Link href={item.href}>
@@ -107,10 +103,8 @@ const SidebarLeft: React.FC<SidebarProps> = ({
         </div>
       </div>
       <div className="mb-4">
-        <hr
-          className={`${isCollapsed ? "hidden" : "block"} border-t border-gray-300`}
-        />
-        <p className={`${isCollapsed ? "hidden" : "block"}`}>Assigner v0.0.1</p>
+        <hr className={`border-t border-gray-300`} />
+        <p className={``}>Assigner v0.0.1</p>
       </div>
     </div>
   );
