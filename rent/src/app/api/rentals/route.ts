@@ -1,23 +1,5 @@
 import { NextResponse } from "next/server";
 
-const sampleCar: Car = {
-  id: 1,
-  minimun_salary: 300,
-  name: "Santa Fé",
-};
-
-const sampleCar2: Car = {
-  id: 1,
-  minimun_salary: 300,
-  name: "Toyota Prius",
-};
-
-const sampleUser: Renter = {
-  id: 1,
-  name: "John Doe",
-  salary: 300,
-};
-
 export async function GET() {
   const rentals: Rental[] = await fetchRentalsFromServer();
 
@@ -26,75 +8,71 @@ export async function GET() {
 
 // Rentals list
 async function fetchRentalsFromServer() {
-  return [
+  const rentalList: Rental[] = [
     {
       id: 1,
-      car: sampleCar,
-      renter: sampleUser,
-      start_date: "2025-02-01",
-      end_date: "2025-02-07",
+      carPlate: "AA10200",
+      renterName: "John Doe 1",
+      startDate: "2025-02-01",
+      endDate: "2025-02-07",
     },
     {
       id: 2,
-      car: sampleCar2,
-      renter: sampleUser,
-      start_date: "2025-02-10",
-      end_date: "2025-02-14",
+      carPlate: "BB10200",
+      renterName: "John Doe 2",
+      startDate: "2025-02-10",
+      endDate: "2025-02-14",
     },
     {
       id: 3,
-      car: sampleCar,
-      renter: sampleUser,
-      start_date: "2025-02-15",
-      end_date: "2025-02-20",
+      carPlate: "CC10200",
+      renterName: "John Doe 3",
+      startDate: "2025-02-15",
+      endDate: "2025-02-20",
     },
     {
       id: 4,
-      car: sampleCar,
-      renter: sampleUser,
-      start_date: "2025-02-18",
-      end_date: "2025-02-22",
+      carPlate: "DD10200",
+      renterName: "John Doe 4",
+      startDate: "2025-02-18",
+      endDate: "2025-02-22",
     },
     {
       id: 5,
-      car: sampleCar,
-      renter: sampleUser,
-      start_date: "2025-02-21",
-      end_date: "2025-02-28",
+      carPlate: "EE10200",
+      renterName: "John Doe 5",
+      startDate: "2025-02-21",
+      endDate: "2025-02-28",
     },
   ];
+
+  return rentalList;
 }
 
 export async function POST(request: Request) {
-  const { eventName, eventPlace, startDate, endDate } = await request.json();
-  console.log("Received event data:", {
-    eventName,
-    eventPlace,
-    startDate,
-    endDate,
-  });
-  const formData = new FormData();
-  formData.append("driver_name", eventName);
-  formData.append("car_plate", eventPlace);
-  formData.append("start_date", startDate);
-  formData.append("end_date", endDate);
+  try {
+    const { renter_name, car_plate, start_date, end_date } =
+      await request.json();
 
-  const rental = {
-    driverName: eventName,
-    car_plate: eventPlace,
-    start_place: startDate,
-    end_date: endDate,
-  };
+    const rental = {
+      renterName: renter_name,
+      carPlate: car_plate,
+      startDate: new Date(start_date),
+      endDate: new Date(end_date),
+    };
 
-  // const formData = await request.formData();
-  const data = Object.fromEntries(formData.entries());
-  // const { name, email, password } = data;
-  return NextResponse.json(
-    {
-      sucess: true,
-      message: "Rental registered sucessfully",
-      data: { data },
-    },
-    { status: 201 }
-  );
+    return NextResponse.json(
+      {
+        sucess: true,
+        message: "Rental registered sucessfully",
+        data: rental,
+      },
+      { status: 201 }
+    );
+  } catch (error) {
+    return NextResponse.json(
+      { sucess: false, message: "Internal server error", error: error },
+      { status: 500 }
+    );
+  }
 }
