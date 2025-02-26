@@ -102,8 +102,8 @@ export default function RentalPage() {
             {sortedRentals.map((rental) => (
               <tr key={rental.id} className="border-t dark:border-gray-700">
                 <td className="p-3">{rental.id}</td>
-                <td className="p-3">{rental.renter.name}</td>
-                <td className="p-3">{rental.car.name}</td>
+                <td className="p-3">Renter ID {rental.renterName}</td>
+                <td className="p-3">Car ID {rental.carPlate}</td>
                 <td className="p-3 text-right">
                   <button className="p-1 rounded hover:bg-gray-300 dark:hover:bg-gray-700">
                     <Icon path={mdiPencil} size={0.8} />
