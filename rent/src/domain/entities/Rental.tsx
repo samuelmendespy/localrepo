@@ -1,7 +1,7 @@
 type Rental = {
   id: number;
-  carPlate: Car;
-  renterName: Renter;
+  carPlate: string;
+  renterName: string;
   startDate: string;
   endDate: string;
 };
