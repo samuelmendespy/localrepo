@@ -7,8 +7,8 @@ import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 
 const EventForm = () => {
-  const [eventName, setEventName] = useState("");
-  const [eventPlace, setEventPlace] = useState("");
+  const [renterName, setRenterName] = useState("");
+  const [carPlate, setCarPlate] = useState("");
   const [dateRange, setDateRange] = useState([
     {
       startDate: new Date(),
@@ -21,17 +21,33 @@ const EventForm = () => {
   const eventDuration =
     differenceInDays(dateRange[0].endDate, dateRange[0].startDate) + 1;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const eventData: Event = {
-      event_name: eventName,
-      event_place: eventPlace,
+    const rentalData = {
+      renter_name: renterName,
+      car_plate: carPlate,
       start_date: dateRange[0].startDate.toISOString(), // Ensure the format
       end_date: dateRange[0].endDate.toISOString(), // Ensure the format
     };
 
-    alert(`Event name: ${eventName}\nEvent duration: ${eventDuration} dias`);
+    const response = await fetch("/api/rentals", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(rentalData),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      alert(`Event created successfully!`);
+      console.log(data);
+    } else {
+      alert("Failed to create event");
+    }
+
+    alert(`Event name: ${renterName}\nEvent duration: ${eventDuration} dias`);
   };
 
   return (
@@ -43,12 +59,12 @@ const EventForm = () => {
       <form onSubmit={handleSubmit} className="space-y-4 mt-6">
         <div>
           <label className="block text-sm font-medium text-gray-700">
-            Event Name
+            Renter Name
           </label>
           <input
             type="text"
-            value={eventName}
-            onChange={(e) => setEventName(e.target.value)}
+            value={renterName}
+            onChange={(e) => setRenterName(e.target.value)}
             placeholder="Type the event name"
             className="w-full p-2 text-gray-700 border border-gray-300 rounded-md mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
@@ -60,8 +76,8 @@ const EventForm = () => {
           </label>
           <input
             type="text"
-            value={eventPlace}
-            onChange={(e) => setEventPlace(e.target.value)}
+            value={carPlate}
+            onChange={(e) => setCarPlate(e.target.value)}
             placeholder="Type the event place"
             className="w-full p-2 text-gray-700 border border-gray-300 rounded-md mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
