@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { DateRangePicker } from "react-date-range";
 import { addDays, differenceInDays } from "date-fns";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
+import debounce from "lodash.debounce";
 
 const BookCarForm = () => {
   const [renterName, setRenterName] = useState("");
@@ -16,6 +17,24 @@ const BookCarForm = () => {
       key: "selection",
     },
   ]);
+
+  const [renterSuggestions, setRenterSuggestions] = useState<string[]>([]);
+
+  // Fetch renters with throttling
+  const fetchRenters = async (query: string) => {
+    if (!query) return setRenterSuggestions([]);
+    const res = await fetch(`/api/renters?name=${query}`);
+    if (res.ok) {
+      const data = await res.json();
+      setRenterSuggestions(data.renters);
+    }
+  };
+
+  const debouncedFetchRenters = useCallback(debounce(fetchRenters, 300), []);
+
+  useEffect(() => {
+    debouncedFetchRenters(renterName);
+  }, [renterName, debouncedFetchRenters]);
 
   // Calculate event duration
   const rentDuration =
@@ -82,6 +101,19 @@ const BookCarForm = () => {
             className="w-full p-2 text-gray-700 border border-gray-300 rounded-md mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
+          {renterSuggestions.length > 0 && (
+            <ul className="border mt-1 bg-white shadow-md rounded-md">
+              {renterSuggestions.map((name) => (
+                <li
+                  key={name}
+                  className="p-2 cursor-pointer hover:bg-gray-200"
+                  onClick={() => setRenterName(name)}
+                >
+                  {name}
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
 
         {/* Date Range Picker */}
