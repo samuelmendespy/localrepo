@@ -1,5 +1,5 @@
 type Car = {
   id: number;
-  name: string;
+  plate: string;
   minimun_salary: number;
 };
