@@ -1,6 +1,5 @@
 # localrepo
-
-Python and Djando chosen to fit job stack
+Simple rent app. One of the project requirements was to use Python and Django
 
 install Python
 
